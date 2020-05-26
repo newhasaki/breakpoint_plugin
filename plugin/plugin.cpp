@@ -99,7 +99,7 @@ void idaapi calls_chooser_t::get_row(qstrvec_t *cols_,
     qstrvec_t& cols = *cols_;
     cols[0] = m_list[n].name;   //第一列列名
     
-    char buffer[MAXSTR] = {0};
+    char buffer[50] = {0};
     qsnprintf(buffer, MAXSTR, "0x%X",m_list[n].base);
     cols[1] = qstring(buffer);        //第二列列名
 }
@@ -125,7 +125,6 @@ static idaapi void set_breakpoint()
 
 static bool idaapi ct_keyboard(TWidget*  ,int key, int shift,void* ud)
 {
-    msg("ct_keyboard\n");
     if (shift == 0) {
         switch (key) {
             case 'Z':
@@ -150,7 +149,7 @@ static const custom_viewer_handlers_t handlers(
 
 
 
-static ssize_t idaapi view_callback(void * /*user_data*/, int notification_code, va_list va)
+static ssize_t idaapi view_callback(void * , int notification_code, va_list va)
 {
     TWidget* view = va_arg(va,TWidget*);
     
